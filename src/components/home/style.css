@@ -10,10 +10,11 @@
     letter-spacing: -0.2px;
 }
 
+
+
 .home h4 {
     color: #FFF;
     font-feature-settings: 'clig' off, 'liga' off;
-    font-family: SF UI Display;
     font-size: 17px;
     font-style: normal;
     font-weight: 500;
@@ -37,7 +38,7 @@
 
 .last-form-item .ant-form-item-row{
     display: flex;
-    flex-direction: column;
+    flex-direction: column !important;
 }
 
 .select-direction {
@@ -62,10 +63,26 @@
     border-radius: 15px;
     background: #009FDF;
     margin-top: 100px;
+    font-size: 18px;
 
 }
 
-.form .ant-col {
-    width: 50px;
-    margin-right: 20px;
+/*.form .ant-col {*/
+/*    width: 50px;*/
+/*    margin-right: 20px;*/
+/*}*/
+
+.form .ant-row {
+    flex-flow: row nowrap;
+}
+
+.form .ant-select-selector {
+    background-color: #009FDF !important;
+    border: 1px solid #009FDF !important;
+    height: 50px !important;
+    color: white;
+}
+
+.form .ant-switch .ant-switch-handle::before {
+    top: -2px;
 }

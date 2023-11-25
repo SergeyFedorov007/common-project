@@ -1,25 +1,29 @@
-import React from "react";
-import "./style.css";
-import { Button, Col, Form, Row, Select, Switch } from "antd";
-import { useWatch } from "antd/es/form/Form";
+import {useEffect} from "react"
+import { Button, Col, Form, Row, Select, Switch } from "antd"
+import {optionsForHomeSelect, preparedFormItems} from "./constants"
+import {UsergroupAddOutlined} from "@ant-design/icons"
+
+import "./style.css"
+
 
 const Home = () => {
-  const { form } = Form.useForm();
+  const [ form ] = Form.useForm()
 
-  const options = [
-    {
-      label: "Web",
-      value: "web",
-    },
-    {
-      label: "Data",
-      value: "data",
-    },
-  ];
+    useEffect(() => {
+        form.setFieldsValue({
+            switch1: false,
+            switch2: false,
+            switch3: false,
+            switch4: false,
+            select: 'web'
+        })
+    }, []);
 
-  const onChange = (value) => {
-    console.log(value);
-  };
+    console.log(form)
+    const getFields = async () => {
+        const values = await form.validateFields()
+        return values
+    }
 
   return (
     <div className="home">
@@ -27,54 +31,22 @@ const Home = () => {
       <Form
         className="form"
         form={form}
-        onValuesChange={(_, values) => {
-          console.log(_);
-          console.log(values);
-        }}
       >
         <h4>Выберите подгруппу по английскому языку </h4>
-        <Form.Item name="switch1">
-          <Row align={"middle"} justify={"space-between"}>
-            <Col>
-              <h4>Подгруппа 1</h4>
-            </Col>
-            <Col>
-              <Switch defaultChecked={false} />
-            </Col>
-          </Row>
-        </Form.Item>
-        <Form.Item name="switch2">
-          <Row align={"middle"} justify={"space-between"}>
-            <Col>
-              <h4>Подгруппа 2</h4>
-            </Col>
-            <Col>
-              <Switch defaultChecked={false} />
-            </Col>
-          </Row>
-        </Form.Item>
-
-        <Row align={"middle"} justify={"space-between"}>
-          <Col span={20}>
-            <h4>Подгруппа 3</h4>
-          </Col>
-          <Col>
-            <Form.Item name="switch3">
-              <Switch defaultChecked={false} />
-            </Form.Item>
-          </Col>
-        </Row>
-
-        <Form.Item name="switch4">
-          <Row align={"middle"} justify={"space-between"}>
-            <Col>
-              <h4>Подгруппа 4</h4>
-            </Col>
-            <Col>
-              <Switch defaultChecked={false} />
-            </Col>
-          </Row>
-        </Form.Item>
+        {
+          preparedFormItems.map((item) => {
+            return  <Row align={"middle"} justify={"space-between"} key={item.name}>
+              <Col span={16}>
+                <h4><UsergroupAddOutlined />{' ' + item.label}</h4>
+              </Col>
+              <Col>
+                <Form.Item name={item.name}>
+                  <Switch defaultChecked={false} />
+                </Form.Item>
+              </Col>
+            </Row>
+          })
+        }
 
         <Form.Item
           className="last-form-item"
@@ -82,15 +54,19 @@ const Home = () => {
           label={<h3 className="select-direction">Выберете направление</h3>}
           labelAlign={"left"}
         >
-          <Select options={options} defaultValue={"web"} onChange={onChange} />
+          <Select options={optionsForHomeSelect} defaultValue={"web"} />
         </Form.Item>
 
-        <Button className="button-continue" type={"primary"}>
+        <Button className="button-continue" type={"primary"} onClick={() => {
+            getFields().then(data => {
+                console.log(data)
+            })
+        }}>
           Продолжить
         </Button>
       </Form>
     </div>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home
