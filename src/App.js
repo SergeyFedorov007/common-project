@@ -1,11 +1,16 @@
-import './App.css'
 import Home from './components/home'
+import ScheduleProvider from "./ScheduleProvider"
+
+import './App.css'
+
 
 function App() {
   return (
-    <div className="container">
-      <Home/>
-    </div>
+      <ScheduleProvider>
+        <div className="container">
+          <Home/>
+        </div>
+      </ScheduleProvider>
   )
 }
 

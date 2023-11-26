@@ -1,25 +1,28 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Button, Col, Form, Row, Select, Switch } from "antd";
-import { optionsForHomeSelect, preparedFormItems } from "./constants";
-import { UsergroupAddOutlined } from "@ant-design/icons";
+import { optionsForHomeSelect, preparedFormItems } from "./constants"
+import { UsergroupAddOutlined } from "@ant-design/icons"
 import scheduleService from "../services/schedule"
+import ScheduleContext from "../../ScheduleContext/ScheduleContext"
 
-import "./style.css";
+import "./style.css"
+
+
 
 const Home = () => {
-  const [schedules, setSchedules] = useState([])
+  const schedule = useContext(ScheduleContext)
   const [webDevelop, setWebDevelop] = useState("")
   const [dataScience, setDataScience] = useState("")
 
-  const [form] = Form.useForm();
+  const [form] = Form.useForm()
 
   useEffect(() => {
+
     form.setFieldsValue({
       switch1: false,
       switch2: false,
       switch3: false,
       switch4: false,
-      select: "web",
     });
   }, []);
 
@@ -29,8 +32,8 @@ const Home = () => {
     return {
       ...values,
       select: webDevelop + dataScience
-    };
-  };
+    }
+  }
 
 
   const getFirstDateAndSecondDate = () => {
@@ -40,6 +43,8 @@ const Home = () => {
       secondDate: currentDate + 5 * 24 * 60 * 60
     }
   }
+
+  console.log(schedule.schedules)
 
   return (
     <div className="home">
@@ -71,36 +76,22 @@ const Home = () => {
           })}
         </div>
 
-        <Form.Item
-          className="last-form-item"
-          name="select"
-          label={<h3 className="select-direction">Выберете направление</h3>}
-          labelAlign={"left"}
-        >
-          <Select
-            defaultOpen={true}
-            options={optionsForHomeSelect}
-            defaultValue={"web"}
-            className="select"
-          />
-        </Form.Item>
-
-   {/*     <h3 className="select-direction">Выберете направление</h3>
+       <h3 className="select-direction">Выберете направление</h3>
         <div className="last-form-item">
-          <Button onClick={() => {
+          <Button className={'button1 ' + (!!webDevelop ? 'active' : '')} onClick={() => {
             setDataScience('')
             setWebDevelop("Web-develop")}}>Web-разработка</Button>
-          <Button onClick={() => {
+          <Button className={'button2 ' + (!!dataScience ? 'active' : '')} onClick={() => {
             setWebDevelop('')
             setDataScience("DataScience")}}>Наука о данных</Button>
-        </div>*/}
+        </div>
         <div>
           <Button
             className="button-continue"
             type={"primary"}
             onClick={async () => {
              const data =  await scheduleService.getSchedule(getFirstDateAndSecondDate().firstDate, getFirstDateAndSecondDate().secondDate)
-              setSchedules(data)
+              schedule.setSchedules(data)
               //getFields().then((data) => {
                 //console.log(data);
               //});
