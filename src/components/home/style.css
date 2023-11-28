@@ -74,7 +74,7 @@
   flex-shrink: 0;
   border-radius: 15px;
   background: var(--main-blue);
-  margin-top: 124px;
+  margin-top: 25px;
   font-size: 18px;
 }
 
@@ -83,7 +83,7 @@
 }
 
 .form-item-row {
-  height: 56px;
+  height: 55px;
   border-bottom: 1px solid #2a2c32;
 }
 
