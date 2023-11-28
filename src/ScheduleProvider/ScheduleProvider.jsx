@@ -1,6 +1,7 @@
 import ScheduleContext from "../ScheduleContext/ScheduleContext"
 import {useState} from "react";
 
+//использование паттерна Provider
 const ScheduleProvider = ({children} ) => {
     const [schedules, setSchedules ] = useState([])
 

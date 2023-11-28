@@ -1,10 +1,11 @@
+
 export const optionsForHomeSelect = [
     {
-        label: "Web разработка",
+        label: "Web-разработка",
         value: "web",
     },
     {
-        label: "Data данные",
+        label: "Наука о данных",
         value: "data",
     },
 ]
