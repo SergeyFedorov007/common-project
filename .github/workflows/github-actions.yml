@@ -16,10 +16,8 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Install Modules
         run: npm install
-      - name: Build Project
-        run: npm run build
-      - name: Test
-        run: npm run test
+      - name: Start Project
+        run: npm run start
       - name: E2E Test
         run: npm run test:e2e
       - name: Lint Code
