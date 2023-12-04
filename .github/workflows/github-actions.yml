@@ -20,5 +20,3 @@ jobs:
         run: npm run test:e2e
       - name: Lint Code
         run: npm run lint
-      - name: Start app
-        run: npm run start
