@@ -1,5 +1,6 @@
 {
   "extends": ["react-app", "react-app/jest"],
+  "ignorePatterns": [".eslintrc", "e2e.test.js", "eslint.js", "typecheck.js"],
   "rules": {
 
     // Core rules
